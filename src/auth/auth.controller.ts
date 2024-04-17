@@ -12,7 +12,9 @@ import { AuthLoginDto } from './dto/auth-login.dto';
 import { AuthRegisterDto } from './dto/auth-register.dto';
 import { Request, Response } from 'express';
 import { clearCookie, setCookie } from 'src/utils/useCookie';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -21,6 +23,11 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Login',
+    description:
+      'Login user and return accessToken, refreshToken, inject refreshToken to cookie and create session. Update session if user delete cookies',
+  })
   async login(
     @Body() dto: AuthLoginDto,
     @Res({ passthrough: true }) res: Response,
@@ -35,6 +42,11 @@ export class AuthController {
   // ---------- Register ---------- //
 
   @Post('register')
+  @ApiOperation({
+    summary: 'Register',
+    description:
+      'Register user and return accessToken, refreshToken, inject refreshToken to cookie and create session',
+  })
   @HttpCode(HttpStatus.CREATED)
   async register(
     @Body() dto: AuthRegisterDto,
@@ -50,6 +62,10 @@ export class AuthController {
   // ---------- Logout ---------- //
 
   @Post('logout')
+  @ApiOperation({
+    summary: 'Logout',
+    description: 'Delete cookie and session from db',
+  })
   @HttpCode(HttpStatus.OK)
   async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
     await this.authService.logout(req);
@@ -65,6 +81,11 @@ export class AuthController {
   // ---------- Refresh Tokens ---------- //
 
   @Post('refresh-tokens')
+  @ApiOperation({
+    summary: 'Refresh tokens',
+    description:
+      'Refresh tokens by cookie refresh token. Return both of them and update session',
+  })
   @HttpCode(HttpStatus.OK)
   async refreshTokens(
     @Req() req: Request,

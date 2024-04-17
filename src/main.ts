@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,6 +20,17 @@ async function bootstrap() {
   app.enableCors({
     origin: [`http://localhost:${PORT}`],
   });
+
+  // ---------- Swagger config ---------- //
+
+  const options = new DocumentBuilder()
+    .setTitle('Coursegarden')
+    .setDescription('Application for create and use courses')
+    .setVersion('0.1')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('api', app, document);
 
   // ---------- Helmet config ---------- //
 
