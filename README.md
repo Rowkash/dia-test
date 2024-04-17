@@ -3,7 +3,8 @@
 - Run the command:
 
 ```shell
-docker-compose up
+docker compose build
+docker compose up -d
 # -d - to run in the background
 # --build - to rebuild containers
 ```
@@ -23,7 +24,6 @@ MYSQL_PASSWORD=admin
 MYSQL_DATABASE=dia-test
 MYSQL_ROOT_PASSWORD=admin
 DATABASE_SYNCHRONIZE=false
-
 AUTH_JWT_SECRET=secret
 ```
 
