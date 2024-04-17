@@ -10,6 +10,7 @@ docker compose up -d
 ```
 ### Documentation on using the API is located at the link "http://localhost:3000/api"
 ### Adminer for operate with db - "http://localhost:5000"
+Data connect to db in .env file
 
 ### Example .env file
 
