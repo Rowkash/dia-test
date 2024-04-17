@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { EventsModule } from './events/events.module';
-import { FilesModule } from './uploads/files.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
   imports: [

@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
   CreateDateColumn,
@@ -10,9 +11,11 @@ import {
   name: 'files',
 })
 export class FileEntity {
+  @ApiProperty({ example: 1 })
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty({ example: 'image.jpg' })
   @Column({ unique: true })
   title: string;
 
